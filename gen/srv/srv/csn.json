@@ -1,0 +1,79 @@
+{
+  "definitions": {
+    "ODService": {
+      "@source": "srv/service.cds",
+      "kind": "service"
+    },
+    "ODService.COVID_STATS": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "DWC.COVID_STATS"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "PROVINCE_STATE": {
+          "type": "cds.String",
+          "length": 5000
+        },
+        "COUNTRY_REGION": {
+          "type": "cds.String",
+          "length": 5000
+        },
+        "DATE": {
+          "type": "cds.Date"
+        },
+        "CONFIRMED": {
+          "type": "cds.Integer"
+        },
+        "DEATHS": {
+          "type": "cds.Integer"
+        },
+        "RECOVERED": {
+          "type": "cds.Integer"
+        },
+        "ACTIVE": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "DWC.COVID_STATS": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "PROVINCE_STATE": {
+          "type": "cds.String",
+          "length": 5000
+        },
+        "COUNTRY_REGION": {
+          "type": "cds.String",
+          "length": 5000
+        },
+        "DATE": {
+          "type": "cds.Date"
+        },
+        "CONFIRMED": {
+          "type": "cds.Integer"
+        },
+        "DEATHS": {
+          "type": "cds.Integer"
+        },
+        "RECOVERED": {
+          "type": "cds.Integer"
+        },
+        "ACTIVE": {
+          "type": "cds.Integer"
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v2.13.8",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}

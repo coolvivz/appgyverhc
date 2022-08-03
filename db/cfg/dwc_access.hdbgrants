@@ -1,0 +1,17 @@
+{
+	"dwcups": {
+		"object_owner": {
+			"roles": [],
+			"container_roles": [],
+			"object_privileges": [
+                {
+				  "type": "VIEW",
+				  "name": "COVID_STATS",
+				  "https://github.com/coolvivz/appgyverhc.gitprivileges_with_grant_option": [
+				    "SELECT"
+				  ]
+				}
+			]
+		}
+	}
+}

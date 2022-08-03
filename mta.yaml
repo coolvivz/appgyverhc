@@ -1,0 +1,51 @@
+_schema-version: "3.1"
+ID: dwc_appgyver
+description: A simple CAP project.
+parameters:
+  enable-parallel-deployments: true
+version: 1.0.13
+modules:
+- name: dwc_appgyver-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: dwc_appgyver-db
+  - name: apgydemo_ups_Service
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+  build-parameters:
+    builder: npm-ci
+- name: dwc_appgyver-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: dwc_appgyver-db
+    properties:
+      TARGET_CONTAINER: ~{hdi-service-name}
+  - name: apgydemo_ups_Service
+    group: SERVICE_REPLACEMENTS
+    properties:
+      key: ServiceName_1
+      service: ~{the-service-name}
+  parameters:
+    buildpack: nodejs_buildpack
+resources:
+- name: dwc_appgyver-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    config:
+      schema: DWC_APPGYVER_CONTAINER
+    service: hanatrial
+    service-plan: hdi-shared
+  properties:
+    hdi-service-name: ${service-name}
+- name: apgydemo_ups_Service
+  type: org.cloudfoundry.existing-service
+  parameters:
+    service-name: dwcups
+  properties:
+    the-service-name: ${service-name}
